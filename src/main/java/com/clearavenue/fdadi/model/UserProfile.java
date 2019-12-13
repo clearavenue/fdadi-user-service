@@ -38,10 +38,11 @@ public class UserProfile {
 
 	/** The medications. */
 	@Builder.Default
+	@EqualsAndHashCode.Exclude
 	private List<Medication> medications = new ArrayList<>();
 
 	@Override
 	public String toString() {
-		return String.format("%s (%d medications)", userId, medications.size());
+		return String.format("%s[%s] (%d medications)", userId, id.toHexString(), medications.size());
 	}
 }
