@@ -4,18 +4,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.BDDMockito.given;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.clearavenue.fdadi.model.UserProfile;
 import com.clearavenue.fdadi.repository.UserProfileRepository;
 
 @ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")
 public class UserProfileServiceTest {
 
 	@Mock
@@ -60,6 +60,6 @@ public class UserProfileServiceTest {
 
 	@Test
 	void getUser() {
-		final Optional<UserProfile> actual = service.getUser("demo");
+		service.getUser("demo");
 	}
 }

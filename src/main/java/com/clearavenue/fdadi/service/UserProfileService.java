@@ -1,5 +1,6 @@
 package com.clearavenue.fdadi.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,10 @@ public class UserProfileService {
 
 	public UserProfile saveUser(final UserProfile user) {
 		return userRepo.save(user);
+	}
+
+	public List<UserProfile> getAllUsers() {
+		return userRepo.findAll();
 	}
 
 	public void deleteAll() {

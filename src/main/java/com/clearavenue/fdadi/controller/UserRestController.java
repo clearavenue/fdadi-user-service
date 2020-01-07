@@ -29,6 +29,9 @@ public class UserRestController {
 	@GetMapping("/user/{username}")
 	public UserResult getUser(@PathVariable final String username) {
 		log.debug("user-service - getUser {}", username);
+		log.debug("all-users = ");
+		log.debug("{}", service.getAllUsers());
+		log.debug("done all-users");
 		final Optional<UserProfile> user = service.getUser(username);
 		return UserResult.builder().user(user).build();
 	}
