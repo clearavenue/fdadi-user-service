@@ -1,4 +1,4 @@
-def dockerImage = "clearavenuedocker/fdadi-discovery"
+def dockerImage = "clearavenuedocker/fdadi-user-service"
 def builtImg = ''
 def SERVER_URL="http://a3fd36bd80a9747afb9405ff3ad944b2-354023137.us-east-1.elb.amazonaws.com"
 
@@ -130,7 +130,7 @@ spec:
  	    container('kubectl') {
  	      script {
 	        withKubeConfig([credentialsId: 'kube-admin', serverUrl: '${SERVER_URL}']) {
-	          sh "kubectl apply -f fdadi-discovery-deployment.yaml"
+	          sh "kubectl apply -f fdadi-user-service-deployment.yaml"
 	        }
 	      }      
 	    }
