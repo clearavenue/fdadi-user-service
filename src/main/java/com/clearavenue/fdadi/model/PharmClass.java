@@ -3,6 +3,8 @@
  */
 package com.clearavenue.fdadi.model;
 
+import java.util.Locale;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +37,7 @@ public class PharmClass {
 		String pharmClassName;
 
 		public PharmClassBuilder pharmClassName(final String text) {
-			this.pharmClassName = text.toUpperCase();
+			this.pharmClassName = text.toUpperCase(Locale.getDefault());
 			return this;
 		}
 	}
