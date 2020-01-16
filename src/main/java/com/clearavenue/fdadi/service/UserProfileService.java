@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserProfileService {
 
+	final String ip = "10.0.0.1";
+
 	private final UserProfileRepository userRepo;
 
 	public Optional<UserProfile> getUser(final String username) {
@@ -32,13 +34,4 @@ public class UserProfileService {
 	public void deleteAll() {
 		userRepo.deleteAll();
 	}
-
-	public int d(final int a, final int b) {
-		if (b == 0) {
-			return Integer.MAX_VALUE;
-		} else {
-			return a / b;
-		}
-	}
-
 }

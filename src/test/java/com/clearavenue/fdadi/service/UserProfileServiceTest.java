@@ -63,11 +63,4 @@ public class UserProfileServiceTest {
 		service.getUser("demo");
 	}
 
-	// remove after testing complexity
-	@Test
-	void complexity() {
-		service.d(1, 2);
-		service.d(1, 0);
-
-	}
 }
