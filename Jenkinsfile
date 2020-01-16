@@ -88,7 +88,7 @@ spec:
           }
         }
          
-        stage('StaticAnalysis') {
+        stage('SpotBugs') {
           steps {
             container('maven') {
               sh "mvn -B -e -T 1C com.github.spotbugs:spotbugs-maven-plugin:3.1.12.2:check -Dspotbugs.effort=Max -Dspotbugs.threshold=Low"
@@ -97,6 +97,19 @@ spec:
           post {
             always {
               recordIssues(enabledForFailure: true, tool: spotBugs())
+            }
+          }
+        }
+        
+        stage('PMD') {
+          steps {
+            container('maven') {
+              sh "maven -B -e -T 1C org.apache.maven.plugins:maven-jxr-plugin:3.0.0:jxr org.apache.maven.plugins:maven-pmd-plugin:3.12.0:pmd"
+            }
+          }
+          post {
+            always {
+              recordIssues(enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml'))
             }
           }
         }
@@ -149,8 +162,8 @@ spec:
   }
     
   post {
-    failure {
-        emailext attachLog: true, subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT', recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+    always {
+        emailext attachLog: true, subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT', recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']]
     }
   }
 }
