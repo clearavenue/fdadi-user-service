@@ -71,41 +71,64 @@ spec:
       }
     }
     
-    stage('CodeCoverage') {
-      steps {
-        container('maven') {
-          sh "mvn -B -e -T 1C org.jacoco:jacoco-maven-plugin:0.8.4:prepare-agent verify org.jacoco:jacoco-maven-plugin:0.8.4:report"
-          jacoco(execPattern: 'target/jacoco.exec', classPattern: 'target/classes', sourcePattern: 'src/main/java', exclusionPattern: 'src/test*', changeBuildStatus: true)
+    stage('DevSecOps') {
+      parallel {
+        stage('CodeCoverage') {
+          steps {
+            container('maven') {
+              sh "mvn -B -e -T 1C org.jacoco:jacoco-maven-plugin:0.8.4:prepare-agent verify org.jacoco:jacoco-maven-plugin:0.8.4:report"
+              jacoco(execPattern: 'target/jacoco.exec', classPattern: 'target/classes', sourcePattern: 'src/main/java', exclusionPattern: 'src/test*', changeBuildStatus: true, 
+                 minimumInstructionCoverage : '30', maximumInstructionCoverage : '50',
+                 minimumBranchCoverage : '0', maximumBranchCoverage : '50',
+                 minimumComplexityCoverage : '30', maximumComplexityCoverage : '50',
+                 minimumLineCoverage : '30', maximumLineCoverage : '50',
+                 minimumMethodCoverage : '30', maximumMethodCoverage : '50',
+                 minimumClassCoverage : '30', maximumClassCoverage : '50')
+            }
+          }
+        }
+         
+        stage('SpotBugs') {
+          steps {
+            container('maven') {
+              sh "mvn -B -e -T 1C com.github.spotbugs:spotbugs-maven-plugin:3.1.12.2:check -Dspotbugs.effort=Max -Dspotbugs.threshold=Low"
+            }
+          }
+          post {
+            always {
+              recordIssues(enabledForFailure: true, tool: spotBugs())
+            }
+          }
+        }
+        
+        stage('PMD') {
+          steps {
+            container('maven') {
+              sh "mvn -B -e org.apache.maven.plugins:maven-jxr-plugin:3.0.0:jxr org.apache.maven.plugins:maven-pmd-plugin:3.12.0:pmd"
+            }
+          }
+          post {
+            always {
+              recordIssues(enabledForFailure: true, tool: pmdParser(pattern: 'target/pmd.xml'))
+            }
+          }
+        }
+    
+        stage('Vulnerabilities') {
+          steps {
+            container('maven') {
+              sh "mvn -B -e -T 1C org.owasp:dependency-check-maven:5.3.0:aggregate -Dformat=xml"
+            }
+          }
+          post {
+            always {
+              dependencyCheckPublisher(failedTotalCritical : 100, unstableTotalCritical : 100)
+            }
+          }
         }
       }
     }
-    
-    stage('StaticAnalysis') {
-      steps {
-        container('maven') {
-          sh "mvn -B -e -T 1C com.github.spotbugs:spotbugs-maven-plugin:3.1.12.2:check -Dspotbugs.effort=Max -Dspotbugs.threshold=Low"
-        }
-      }
-      post {
-        always {
-          recordIssues(enabledForFailure: true, tool: spotBugs())
-        }
-      }
-    }
-    
-    stage('Vulnerabilities') {
-      steps {
-        container('maven') {
-          sh "mvn -B -e -T 1C org.owasp:dependency-check-maven:5.3.0:aggregate -Dformat=xml"
-        }
-      }
-      post {
-        always {
-          dependencyCheckPublisher(failedTotalCritical : 100, unstableTotalCritical : 100)
-        }
-      }
-    }
-    
+
     stage('Push Docker') {
       when {
         expression { currentBuild.result == 'SUCCESS' }
@@ -139,8 +162,8 @@ spec:
   }
     
   post {
-    failure {
-        emailext attachLog: true, subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT', recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+    always {
+        emailext attachLog: true, subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT', recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']]
     }
   }
 }

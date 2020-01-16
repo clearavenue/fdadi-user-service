@@ -62,4 +62,5 @@ public class UserProfileServiceTest {
 	void getUser() {
 		service.getUser("demo");
 	}
+
 }

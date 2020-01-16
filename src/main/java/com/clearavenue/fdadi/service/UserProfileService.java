@@ -32,5 +32,4 @@ public class UserProfileService {
 	public void deleteAll() {
 		userRepo.deleteAll();
 	}
-
 }
