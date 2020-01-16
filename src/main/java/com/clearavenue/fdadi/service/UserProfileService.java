@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserProfileService {
 
-	final String ip = "10.0.0.1";
-
 	private final UserProfileRepository userRepo;
 
 	public Optional<UserProfile> getUser(final String username) {

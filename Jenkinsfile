@@ -104,7 +104,7 @@ spec:
         stage('PMD') {
           steps {
             container('maven') {
-              sh "mvn -B -e -T 1C org.apache.maven.plugins:maven-jxr-plugin:3.0.0:jxr org.apache.maven.plugins:maven-pmd-plugin:3.12.0:pmd"
+              sh "mvn -B -e org.apache.maven.plugins:maven-jxr-plugin:3.0.0:jxr org.apache.maven.plugins:maven-pmd-plugin:3.12.0:pmd"
             }
           }
           post {
