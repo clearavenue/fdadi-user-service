@@ -55,13 +55,28 @@ spec:
   stages {
     
     stage('Build') {
-      steps {
-        container('docker') {
-          sh "docker build -t ${dockerImage}:${VERSION} ."
+      parallel {
+        stage('Build code') {
+          steps {
+            container('docker') {
+              sh "docker build -t ${dockerImage}:${VERSION} ."
+            }
+          }
         }
+        
+        stage('Checkstyle code') {
+          steps {
+            container('maven') {
+              sh "mvn -B -e -T 1C org.apache.maven.plugins:maven-checkstyle-plugin:3.1.0:checkstyle -Dcheckstyle.config.location=google_checks.xml"
+            }    
+          }
+          post {
+              recordIssues(enabledForFailure: false, tool: checkStyle(pattern: 'target/checkstyle-result.xml'))
+          }
+        }                
       }
     }
-    
+
     stage('JUnit') {
       steps {
         container('maven') {
