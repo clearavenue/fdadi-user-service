@@ -11,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.clearavenue.fdadi.service.UserProfileService;
+
 @WebMvcTest(VersionController.class)
 @ActiveProfiles("test")
 public class VersionControllerTest {
@@ -20,6 +22,9 @@ public class VersionControllerTest {
 
 	@MockBean
 	BuildProperties buildProperties;
+
+	@MockBean
+	private UserProfileService userProfileService;
 
 	@Test
 	public void getVersion() throws Exception {
