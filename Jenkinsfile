@@ -1,6 +1,7 @@
 def dockerImage = "clearavenuedocker/fdadi-user-service"
 def builtImg = ''
 def SERVER_URL="http://a3fd36bd80a9747afb9405ff3ad944b2-354023137.us-east-1.elb.amazonaws.com"
+def deploymentFile = "fdadi-user-service-deployment.yaml"
 
 pipeline {
   agent {
@@ -60,7 +61,6 @@ spec:
           steps {
             container('docker') {
               sh "docker build -t ${dockerImage}:${VERSION} ."
-              sh "docker build -t ${dockerImage}:latest ."              
             }
           }
         }
@@ -157,9 +157,7 @@ spec:
             docker.withRegistry('', 'docker') {
 	          sh "docker push ${dockerImage}:${VERSION}"
 	          sh "docker rmi ${dockerImage}:${VERSION}"
-	          sh "docker push ${dockerImage}:latest"
-	          sh "docker rmi ${dockerImage}:latest"	          
-	        }                           
+ 	        }                           
 	      }
 	    }
 	  }
@@ -173,7 +171,8 @@ spec:
  	    container('kubectl') {
  	      script {
 	        withKubeConfig([credentialsId: 'kube-admin', serverUrl: '${SERVER_URL}']) {
-	          sh "kubectl apply -f fdadi-user-service-deployment.yaml"
+	          sh "sed -i 's/:latest/:${VERSION}/' ${deploymentFile}"
+	          sh "kubectl apply -f ${deploymentFile}"
 	        }
 	      }      
 	    }
