@@ -1,4 +1,3 @@
-#Create A Deployment and Service That will route traffic from a gateway to that deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,7 +20,6 @@ spec:
       containers:
         - name: fdadi-user-service
           image: clearavenuedocker/fdadi-user-service:latest
-          #Tells the deployment to always pull the image from dockerhub, even if already present on the machine
           imagePullPolicy: Always
           livenessProbe:
             initialDelaySeconds: 90
@@ -32,19 +30,9 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8082
-
           ports:
             - name: user-service
               containerPort: 8082
-          #volumeMounts:
-          #  - name: {volume-name}
-          #    mountPath: {volume-mount-path-in-container}
-      #volumes:
-      #  - name: {volume-name}
-      #    hostPath:
-      #      path: {volume-mount-path-host-machine}
-            #specifies that the volume will create a directory, at the specified path, on the host machine to store data 
-      #      type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
@@ -58,4 +46,18 @@ spec:
       name: http
   selector:
     app: fdadi
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: main-gateway
+spec:
+  selector:
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
 ---
