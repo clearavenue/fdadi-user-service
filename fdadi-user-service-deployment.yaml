@@ -43,7 +43,7 @@ spec:
   ports:
     - port: 8082
       targetPort: 8082
-      name: http
+      name: http-fdadi-user-service
   selector:
     app: fdadi
 ---
