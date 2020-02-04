@@ -26,7 +26,7 @@ public class UserProfileService {
 		if (existingUser.isPresent()) {
 			return existingUser.get();
 		}
-		return UserProfile.builder().build();
+		return userRepo.save(user);
 	}
 
 	public List<UserProfile> getAllUsers() {
