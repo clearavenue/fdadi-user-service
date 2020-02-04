@@ -22,7 +22,11 @@ public class UserProfileService {
 	}
 
 	public UserProfile saveUser(final UserProfile user) {
-		return userRepo.save(user);
+		final Optional<UserProfile> existingUser = userRepo.findByUserId(user.getUserId());
+		if (existingUser.isPresent()) {
+			return existingUser.get();
+		}
+		return UserProfile.builder().build();
 	}
 
 	public List<UserProfile> getAllUsers() {
