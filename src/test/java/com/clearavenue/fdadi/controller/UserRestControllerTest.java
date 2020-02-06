@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -35,6 +36,9 @@ public class UserRestControllerTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	@MockBean
+	BuildProperties buildProperties;
 
 	@Test
 	public void deleteAllTest() throws Exception {

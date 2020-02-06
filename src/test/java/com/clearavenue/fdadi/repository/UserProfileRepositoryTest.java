@@ -8,7 +8,9 @@ import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.TransactionSystemException;
@@ -33,6 +35,9 @@ public class UserProfileRepositoryTest {
 
 	@Autowired
 	private UserProfileRepository repo;
+
+	@MockBean
+	BuildProperties buildProperties;
 
 	@Test
 	void injectedComponentsAreNotNull() {
