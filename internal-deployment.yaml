@@ -93,7 +93,8 @@ metadata:
   namespace: APP_NAME
 spec:
   ports:
-    - protocol: HTTP
+    - name: http
+      protocol: TCP
       port: SERVICE_PORT
       targetPort: SERVICE_PORT
   selector:
