@@ -72,16 +72,16 @@ spec:
           image: DOCKER_USER/SERVICE_NAME:latest
           imagePullPolicy: Always
           env:
-          - name: SERVER_SERVLET_CONTEXT_PATH
-            value: "/APP_NAME/BRANCH_NAME/"
+          #- name: SERVER_SERVLET_CONTEXT_PATH
+          #  value: "/APP_NAME/BRANCH_NAME/"
           livenessProbe:
             initialDelaySeconds: 90
             httpGet:
-              path: /APP_NAME/BRANCH_NAME/LIVENESS_URL
+              path: LIVENESS_URL
               port: SERVICE_PORT
           readinessProbe:
             httpGet:
-              path: /APP_NAME/BRANCH_NAME/READINESS_URL
+              path: READINESS_URL
               port: SERVICE_PORT
           ports:
             - name: http
@@ -99,39 +99,37 @@ spec:
   selector:
     app: APP_NAME
 ---
-kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
 metadata:
-  name: gateway-to-SERVICE_NAME-BRANCH_NAME-vs
+  name: SERVICE_NAME-BRANCH_NAME
   namespace: default
 spec:
   hosts:
-  - "aa2e7b27c1cd44b91be7df2d25925337-1841660522.us-east-1.elb.amazonaws.com"
+  - "SERVICE_NAME.APP_NAME"
   gateways:
   - "main-gateway"
-  http:
-  - match:
-    - uri:
-        prefix: "/APP_NAME/BRANCH_NAME/"
+  tcp:
+  - timeout: 60s
     route:
     - destination:
-        host: SERVICE_NAME.APP_NAME.svc.cluster.local
-        subset: BRANCH_NAME
+        host: SERVICE_NAME.APP_NAME
         port:
           number: SERVICE_PORT
     retries:
-      attempts: 5
+      attempts: 5000
       perTryTimeout: 2s
       retryOn: connect-failure,internal,500,503,5xx,reset
-    websocketUpgrade: true 
-  - route:
+    websocketUpgrade: true
+  http:
+  - timeout: 60s
+    route:
     - destination:
-        host: SERVICE_NAME.APP_NAME.svc.cluster.local
-        subset: master
+        host: SERVICE_NAME.APP_NAME
         port:
           number: SERVICE_PORT
     retries:
-      attempts: 5
+      attempts: 5000
       perTryTimeout: 2s
       retryOn: connect-failure,internal,500,503,5xx,reset
     websocketUpgrade: true
