@@ -108,7 +108,7 @@ spec:
   - "SERVICE_NAME.APP_NAME"
   gateways:
   - "main-gateway"
-  -"*"
+  - "*"
   tcp:
   - timeout: 60s
     route:
@@ -127,7 +127,7 @@ spec:
     - destination:
         host: SERVICE_NAME.APP_NAME
         port:
-          number: 8083
+          number: SERVICE_PORT
     retries:
       attempts: 5000
       perTryTimeout: 2s
