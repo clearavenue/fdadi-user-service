@@ -109,7 +109,6 @@ spec:
   - "SERVICE_NAME.APP_NAME"
   gateways:
   - "main-gateway"
-  - "*"
   tcp:
   - timeout: 60s
     route:
