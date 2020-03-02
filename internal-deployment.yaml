@@ -97,7 +97,6 @@ spec:
       targetPort: SERVICE_PORT
   selector:
     app: SERVICE_NAME
-    app: fdadi-frontend
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
