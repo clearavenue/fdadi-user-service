@@ -83,6 +83,8 @@ spec:
           ports:
             - name: http
               containerPort: SERVICE_PORT
+            - name: mysql
+              containerPort: 3306
 ---
 kind: Service
 apiVersion: v1
