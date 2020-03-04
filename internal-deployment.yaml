@@ -81,11 +81,11 @@ spec:
               path: READINESS_URL
               port: SERVICE_PORT
           ports:
-            - name: http-front
+            - name: https-front
               containerPort: 8081
-            - name: http-user
+            - name: https-user
               containerPort: SERVICE_PORT
-            - name: http-med
+            - name: https-med
               containerPort: 8083
             - name: mysql
               containerPort: 3306
@@ -126,7 +126,7 @@ spec:
       perTryTimeout: 2s
       retryOn: connect-failure,internal,500,503,5xx,reset
     websocketUpgrade: true
-  http:
+  https:
   - timeout: 60s
     route:
     - destination:
