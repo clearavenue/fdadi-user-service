@@ -112,7 +112,7 @@ spec:
   hosts:
   - "SERVICE_NAME.APP_NAME.svc.cluster.local"
   gateways:
-  - "main-gateway"
+  - "ingressgateway"
   tcp:
   - timeout: 60s
     route:
