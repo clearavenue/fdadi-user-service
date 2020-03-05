@@ -112,8 +112,8 @@ spec:
   hosts:
   - "SERVICE_NAME.APP_NAME.svc.cluster.local"
   gateways:
-  - "ingressgateway"
-  tcp:
+  - "ingressgateway.istio-system"
+  http:
   - timeout: 60s
     route:
     - destination:
