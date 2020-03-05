@@ -81,11 +81,11 @@ spec:
               path: READINESS_URL
               port: SERVICE_PORT
           ports:
-            - name: https-front
+            - name: http-front
               containerPort: 8081
-            - name: https-user
+            - name: http-user
               containerPort: SERVICE_PORT
-            - name: https-med
+            - name: http-med
               containerPort: 8083
             - name: mysql
               containerPort: 3306
@@ -97,8 +97,7 @@ metadata:
   namespace: APP_NAME
 spec:
   ports:
-    - name: https
-      protocol: TCP
+    - name: http-user
       port: SERVICE_PORT
       targetPort: SERVICE_PORT
   selector:
