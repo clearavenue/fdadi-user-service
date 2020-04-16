@@ -81,7 +81,7 @@ spec:
               path: READINESS_URL
               port: SERVICE_PORT
           ports:
-            - name: http
+            - name: https
               containerPort: SERVICE_PORT
 ---
 kind: Service
@@ -118,7 +118,7 @@ spec:
       perTryTimeout: 2s
       retryOn: connect-failure,internal,500,503,5xx,reset
     websocketUpgrade: true
-  http:
+  https:
   - timeout: 60s
     route:
     - destination:
