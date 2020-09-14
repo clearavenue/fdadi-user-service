@@ -3,6 +3,7 @@ package com.clearavenue.fdadi.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.clearavenue.fdadi.service.VersionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
@@ -24,7 +25,11 @@ public class VersionControllerTest {
 	BuildProperties buildProperties;
 
 	@MockBean
-	private UserProfileService userProfileService;
+	UserProfileService userProfileService;
+
+	@MockBean
+	VersionService versionService;
+
 
 	@Test
 	public void getVersion() throws Exception {
