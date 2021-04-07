@@ -51,17 +51,17 @@ metadata:
   name: SERVICE_NAME-BRANCH_NAME
   namespace: APP_NAME
   labels:
-    app: APP_NAME
+    app: SERVICE_NAME
     version: BRANCH_NAME
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: APP_NAME
+      app: SERVICE_NAME
   template:
     metadata:
       labels:
-        app: APP_NAME
+        app: SERVICE_NAME
         version: BRANCH_NAME
       annotations:
         sidecar.istio.io/inject: "true"
@@ -81,8 +81,14 @@ spec:
               path: READINESS_URL
               port: SERVICE_PORT
           ports:
-            - name: https
+            - name: http-front
+              containerPort: 8081
+            - name: http-user
               containerPort: SERVICE_PORT
+            - name: http-med
+              containerPort: 8083
+            - name: mysql
+              containerPort: 3306
 ---
 kind: Service
 apiVersion: v1
@@ -91,10 +97,11 @@ metadata:
   namespace: APP_NAME
 spec:
   ports:
-    - port: SERVICE_PORT
+    - name: http-user
+      port: SERVICE_PORT
       targetPort: SERVICE_PORT
   selector:
-    app: APP_NAME
+    app: SERVICE_NAME
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -103,10 +110,10 @@ metadata:
   namespace: default
 spec:
   hosts:
-  - "SERVICE_NAME.APP_NAME"
+  - "SERVICE_NAME.APP_NAME.svc.cluster.local"
   gateways:
-  - "main-gateway"
-  tcp:
+  - "ingressgateway.istio-system"
+  http:
   - timeout: 60s
     route:
     - destination:
