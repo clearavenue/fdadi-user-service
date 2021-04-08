@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +20,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@RequiredArgsConstructor
 @Slf4j
 public class UserRestController {
 
-	@Autowired
-	UserProfileService service;
+	private final UserProfileService service;
 
 	@SuppressFBWarnings(value = "SPRING_ENDPOINT", justification = "This is a valid spring endpoint")
 	@GetMapping("/user/{username}")

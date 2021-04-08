@@ -17,14 +17,17 @@ public class UserProfileService {
 	private final UserProfileRepository userRepo;
 
 	public Optional<UserProfile> getUser(final String username) {
-		final Optional<UserProfile> user = userRepo.findByUserId(username);
-		return user;
+		return userRepo.findByUserId(username);
 	}
 
 	public UserProfile saveUser(final UserProfile user) {
 		final Optional<UserProfile> existingUser = userRepo.findByUserId(user.getUserId());
 		if (existingUser.isPresent()) {
-			return existingUser.get();
+			var existing = existingUser.get();
+			existing.setMedications(user.getMedications());
+			existing.setPassword(user.getPassword());
+			existing.setUserId(user.getUserId());
+			return userRepo.save(existing);
 		}
 		return userRepo.save(user);
 	}

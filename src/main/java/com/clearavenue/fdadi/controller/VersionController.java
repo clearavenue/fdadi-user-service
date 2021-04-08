@@ -1,6 +1,8 @@
 package com.clearavenue.fdadi.controller;
 
+import com.clearavenue.fdadi.service.VersionService;
 import org.springframework.boot.info.BuildProperties;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +13,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class VersionController {
 
-	private final BuildProperties buildProperties;
+	private final VersionService versionService;
 
-	@RequestMapping(value = "/version", method = RequestMethod.GET)
+	@GetMapping("/version")
 	public String getVersion() {
-		final String version = String.format("%s : %s", buildProperties.getArtifact(), buildProperties.getVersion());
-		return version;
+		return versionService.version();
 	}
 }
