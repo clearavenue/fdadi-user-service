@@ -11,12 +11,15 @@
 
 	<groupId>com.clearavenue</groupId>
 	<artifactId>fdadi-user-service</artifactId>
-	<version>2.3.0</version>
+	<version>3.0.0</version>
 	<name>fdadi-user-service</name>
 	<description>fdadi user service</description>
 
 	<properties>
 		<java.version>11</java.version>
+		
+		<!-- fix for CVE-2021-21409 -->
+		<netty.version>4.1.63.Final</netty.version>
 	</properties>
 
 	<dependencies>
