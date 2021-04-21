@@ -11,5 +11,4 @@ class FdadiUserServiceApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
