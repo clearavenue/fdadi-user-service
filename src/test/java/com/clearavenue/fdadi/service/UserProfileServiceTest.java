@@ -22,72 +22,72 @@ import com.clearavenue.fdadi.repository.UserProfileRepository;
 @ActiveProfiles("test")
 public class UserProfileServiceTest {
 
-	@Mock
-	private UserProfileRepository repo;
+    @Mock
+    private UserProfileRepository repo;
 
-	@InjectMocks
-	private UserProfileService service;
+    @InjectMocks
+    private UserProfileService service;
 
-	@Test
-	void deleteAll() {
-		service.deleteAll();
-		assertDoesNotThrow(() -> {
-		});
-	}
+    @Test
+    void deleteAll() {
+        service.deleteAll();
+        assertDoesNotThrow(() -> {
+        });
+    }
 
-	@Test
-	void saveUser() {
-		final UserProfile expected = UserProfile.builder().userId("demo").password("pwd").build();
-		given(repo.save(expected)).willReturn(expected);
+    @Test
+    void saveUser() {
+        final UserProfile expected = UserProfile.builder().userId("demo").password("pwd").build();
+        given(repo.save(expected)).willReturn(expected);
 
-		final UserProfile actual = service.saveUser(expected);
-		assertThat(actual).isEqualTo(expected);
-	}
+        final UserProfile actual = service.saveUser(expected);
+        assertThat(actual).isEqualTo(expected);
+    }
 
-	@Test
-	void saveExistingUser() {
-		final Medication med1 = Medication.builder().id(1L).medicationName("one").build();
-		final UserProfile existing = UserProfile.builder().userId("demo").password("pwd").medications(List.of(med1)).build();
-		given(repo.findByUserId(existing.getUserId())).willReturn(Optional.of(existing));
+    @Test
+    void saveExistingUser() {
+        final Medication med1 = Medication.builder().id(1L).medicationName("one").build();
+        final UserProfile existing = UserProfile.builder().userId("demo").password("pwd").medications(List.of(med1)).build();
+        given(repo.findByUserId(existing.getUserId())).willReturn(Optional.of(existing));
 
-		final UserProfile expected = UserProfile.builder().userId("demo").password("pwd").medications(List.of(med1)).build();
-		given(repo.save(expected)).willReturn(expected);
+        final UserProfile expected = UserProfile.builder().userId("demo").password("pwd").medications(List.of(med1)).build();
+        given(repo.save(expected)).willReturn(expected);
 
-		final UserProfile actual = service.saveUser(expected);
-		assertThat(actual).isEqualTo(expected);
-	}
+        final UserProfile actual = service.saveUser(expected);
+        assertThat(actual).isEqualTo(expected);
+    }
 
-	@Test
-	void saveUserNoUserId() {
-		final UserProfile expected = UserProfile.builder().password("pwd").build();
-		given(repo.save(expected)).willReturn(expected);
+    @Test
+    void saveUserNoUserId() {
+        final UserProfile expected = UserProfile.builder().password("pwd").build();
+        given(repo.save(expected)).willReturn(expected);
 
-		final UserProfile actual = service.saveUser(expected);
-		assertThat(actual).isEqualTo(expected);
-	}
+        final UserProfile actual = service.saveUser(expected);
+        assertThat(actual).isEqualTo(expected);
+    }
 
-	@Test
-	void saveUserNoPwd() {
-		final UserProfile expected = UserProfile.builder().userId("demo").build();
-		given(repo.save(expected)).willReturn(expected);
+    @Test
+    void saveUserNoPwd() {
+        final UserProfile expected = UserProfile.builder().userId("demo").build();
+        given(repo.save(expected)).willReturn(expected);
 
-		final UserProfile actual = service.saveUser(expected);
-		assertThat(actual).isEqualTo(expected);
-	}
+        final UserProfile actual = service.saveUser(expected);
+        assertThat(actual).isEqualTo(expected);
+    }
 
-	@Test
-	void getUser() {
-		service.getUser("demo");
-	}
+    @Test
+    void getUser() {
+        service.getUser("demo");
+    }
 
-	@Test
-	void getAllUsers() {
-		final UserProfile one = UserProfile.builder().userId("one").password("pwd").build();
-		final UserProfile two = UserProfile.builder().userId("two").password("pwd").build();
-		final UserProfile three = UserProfile.builder().userId("three").password("pwd").build();
-		given(repo.findAll()).willReturn(List.of(one, two, three));
-		final var list = service.getAllUsers();
-		assertThat(list.size()).isEqualTo(3);
-	}
+    @Test
+    void getAllUsers() {
+        final UserProfile one = UserProfile.builder().userId("one").password("pwd").build();
+        final UserProfile two = UserProfile.builder().userId("two").password("pwd").build();
+        final UserProfile three = UserProfile.builder().userId("three").password("pwd").build();
+        given(repo.findAll()).willReturn(List.of(one, two, three));
+        final var list = service.getAllUsers();
+        assertThat(list.size()).isEqualTo(3);
+    }
 
 }
