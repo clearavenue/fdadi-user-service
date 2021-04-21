@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AllMedicationsResult {
 
-	@Builder.Default
-	private List<Medication> medications = new ArrayList<>();
+    @Builder.Default
+    private List<Medication> medications = new ArrayList<>();
 }

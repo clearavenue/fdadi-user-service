@@ -19,10 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RecallResult {
 
-	@JsonProperty("meta")
-	public Meta meta;
+    @JsonProperty("meta")
+    public Meta meta;
 
-	@JsonProperty("results")
-	@Builder.Default
-	public List<RecallResults> results = null;
+    @JsonProperty("results")
+    @Builder.Default
+    public List<RecallResults> results = null;
 }

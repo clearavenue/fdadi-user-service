@@ -1,6 +1,3 @@
-/*
- *
- */
 package com.clearavenue.fdadi.model;
 
 import java.util.Locale;
@@ -26,20 +23,20 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PharmClass {
 
-	@Id
-	@EqualsAndHashCode.Exclude
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @EqualsAndHashCode.Exclude
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String pharmClassName;
+    private String pharmClassName;
 
-	public static class PharmClassBuilder {
-		String pharmClassName;
+    public static class PharmClassBuilder {
+        String pharmClassName;
 
-		public PharmClassBuilder pharmClassName(final String text) {
-			this.pharmClassName = text.toUpperCase(Locale.getDefault());
-			return this;
-		}
-	}
+        public PharmClassBuilder pharmClassName(final String text) {
+            this.pharmClassName = text.toUpperCase(Locale.getDefault());
+            return this;
+        }
+    }
 
 }

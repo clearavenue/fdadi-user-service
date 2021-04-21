@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class MedicationDetailsResult {
-	private LabelResult labelResult;
+    private LabelResult labelResult;
 }

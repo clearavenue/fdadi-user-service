@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class AllPharmClassesResult {
-	@Builder.Default
-	private List<PharmClass> pharmClasses = new ArrayList<>();
+    @Builder.Default
+    private List<PharmClass> pharmClasses = new ArrayList<>();
 }

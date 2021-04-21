@@ -1,8 +1,9 @@
 package com.clearavenue.fdadi.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

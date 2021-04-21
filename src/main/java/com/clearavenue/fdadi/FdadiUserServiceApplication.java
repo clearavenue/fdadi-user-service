@@ -15,18 +15,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FdadiUserServiceApplication {
 
-	private final BuildProperties buildProperties;
+    private final BuildProperties buildProperties;
 
-	@Bean
-	public ApplicationRunner osLogger(final Environment environment) {
-		return (arguments) -> {
-			log.info("Starting {} : {}", buildProperties.getName(), buildProperties.getVersion());
-			log.info("Running on {} {} ({})", environment.getProperty("os.name"), environment.getProperty("os.version"), environment.getProperty("os.arch"));
-			log.info("Startup complete.");
-		};
-	}
+    @Bean
+    public ApplicationRunner osLogger(final Environment environment) {
+        return arguments -> {
+            log.info("Starting {} : {}", buildProperties.getName(), buildProperties.getVersion());
+            log.info("Running on {} {} ({})", environment.getProperty("os.name"), environment.getProperty("os.version"), environment.getProperty("os.arch"));
+            log.info("Startup complete.");
+        };
+    }
 
-	public static void main(final String[] args) {
-		SpringApplication.run(FdadiUserServiceApplication.class, args);
-	}
+    public static void main(final String[] args) {
+        SpringApplication.run(FdadiUserServiceApplication.class, args);
+    }
 }
