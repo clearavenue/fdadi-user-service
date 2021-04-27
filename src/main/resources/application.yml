@@ -31,6 +31,6 @@ spring:
   profiles: local
 
   datasource:
-    url: jdbc:mysql://localhost:3306/fdadi
+    url: jdbc:h2:mem:fdadi
     username: fdadi
     password: cL3ar#12
