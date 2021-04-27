@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Meta {
-	@JsonProperty("disclaimer")
-	public String disclaimer;
-	@JsonProperty("terms")
-	public String terms;
-	@JsonProperty("license")
-	public String license;
-	@JsonProperty("last_updated")
-	public String lastUpdated;
-	@JsonProperty("results")
-	public MetaResults results;
+    @JsonProperty("disclaimer")
+    public String disclaimer;
+    @JsonProperty("terms")
+    public String terms;
+    @JsonProperty("license")
+    public String license;
+    @JsonProperty("last_updated")
+    public String lastUpdated;
+    @JsonProperty("results")
+    public MetaResults results;
 }

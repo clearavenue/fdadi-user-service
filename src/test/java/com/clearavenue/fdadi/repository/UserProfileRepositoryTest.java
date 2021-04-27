@@ -24,61 +24,61 @@ import com.clearavenue.fdadi.model.UserProfile;
 @ActiveProfiles("test")
 public class UserProfileRepositoryTest {
 
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@Autowired
-	private EntityManager entityManager;
+    @Autowired
+    private EntityManager entityManager;
 
-	@Autowired
-	private UserProfileRepository repo;
+    @Autowired
+    private UserProfileRepository repo;
 
-	@MockBean
-	BuildProperties buildProperties;
+    @MockBean
+    BuildProperties buildProperties;
 
-	@Test
-	void injectedComponentsAreNotNull() {
-		assertThat(dataSource).isNotNull();
-		assertThat(jdbcTemplate).isNotNull();
-		assertThat(entityManager).isNotNull();
-		assertThat(repo).isNotNull();
-	}
+    @Test
+    void injectedComponentsAreNotNull() {
+        assertThat(dataSource).isNotNull();
+        assertThat(jdbcTemplate).isNotNull();
+        assertThat(entityManager).isNotNull();
+        assertThat(repo).isNotNull();
+    }
 
-	@Test
-	public void saveTest() {
-		final UserProfile preSave = UserProfile.builder().userId("DemoUser").password("DemoPwd").build();
-		assertThat(preSave.getId()).isNull();
+    @Test
+    public void saveTest() {
+        final UserProfile preSave = UserProfile.builder().userId("DemoUser").password("DemoPwd").build();
+        assertThat(preSave.getId()).isNull();
 
-		final UserProfile postSave = repo.save(preSave);
-		assertThat(postSave.getId()).isNotNull();
-		assertThat(postSave.getUserId()).isEqualTo(preSave.getUserId());
-		assertThat(postSave.getPassword()).isEqualTo(preSave.getPassword());
-		assertThat(repo.count()).isEqualTo(1);
-	}
+        final UserProfile postSave = repo.save(preSave);
+        assertThat(postSave.getId()).isNotNull();
+        assertThat(postSave.getUserId()).isEqualTo(preSave.getUserId());
+        assertThat(postSave.getPassword()).isEqualTo(preSave.getPassword());
+        assertThat(repo.count()).isEqualTo(1);
+    }
 
-	@Test
-	public void saveTestNoPwd() {
-		final UserProfile preSave = UserProfile.builder().userId("DemoUser").build();
-		assertThat(preSave.getId()).isNull();
-		assertThat(preSave.getPassword()).isNull();
+    @Test
+    public void saveTestNoPwd() {
+        final UserProfile preSave = UserProfile.builder().userId("DemoUser").build();
+        assertThat(preSave.getId()).isNull();
+        assertThat(preSave.getPassword()).isNull();
 
-		assertThrows(TransactionSystemException.class, () -> {
-			repo.save(preSave);
-		});
+        assertThrows(TransactionSystemException.class, () -> {
+            repo.save(preSave);
+        });
 
-	}
+    }
 
-	@Test
-	public void saveTestNoUserId() {
-		final UserProfile preSave = UserProfile.builder().password("DemoPwd").build();
-		assertThat(preSave.getId()).isNull();
-		assertThat(preSave.getUserId()).isNull();
+    @Test
+    public void saveTestNoUserId() {
+        final UserProfile preSave = UserProfile.builder().password("DemoPwd").build();
+        assertThat(preSave.getId()).isNull();
+        assertThat(preSave.getUserId()).isNull();
 
-		assertThrows(TransactionSystemException.class, () -> {
-			repo.save(preSave);
-		});
-	}
+        assertThrows(TransactionSystemException.class, () -> {
+            repo.save(preSave);
+        });
+    }
 }

@@ -28,73 +28,73 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ActiveProfiles("test")
 public class UserRestControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	@MockBean
-	private UserProfileService userProfileService;
+    @MockBean
+    private UserProfileService userProfileService;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	@MockBean
-	BuildProperties buildProperties;
+    @MockBean
+    BuildProperties buildProperties;
 
-	@Test
-	public void deleteAllTest() throws Exception {
-		final String expected = "All users deleted";
+    @Test
+    public void deleteAllTest() throws Exception {
+        final String expected = "All users deleted";
 
-		final MvcResult result = mockMvc.perform(get("/deleteAll")).andExpect(status().isOk()).andReturn();
-		final String actual = result.getResponse().getContentAsString();
-		assertThat(actual).isNotNull();
-		assertThat(actual).isEqualTo(expected);
-	}
+        final MvcResult result = mockMvc.perform(get("/deleteAll")).andExpect(status().isOk()).andReturn();
+        final String actual = result.getResponse().getContentAsString();
+        assertThat(actual).isNotNull();
+        assertThat(actual).isEqualTo(expected);
+    }
 
-	@Test
-	public void getUserTestNotFound() throws Exception {
-		final MvcResult result = mockMvc.perform(get("/user/DemoUser")).andExpect(status().isOk()).andReturn();
-		final UserResult actual = objectMapper.readValue(result.getResponse().getContentAsString(), UserResult.class);
-		assertThat(actual.getUser()).isEqualTo(Optional.empty());
-	}
+    @Test
+    public void getUserTestNotFound() throws Exception {
+        final MvcResult result = mockMvc.perform(get("/user/DemoUser")).andExpect(status().isOk()).andReturn();
+        final UserResult actual = objectMapper.readValue(result.getResponse().getContentAsString(), UserResult.class);
+        assertThat(actual.getUser()).isEqualTo(Optional.empty());
+    }
 
-	@Test
-	public void getUserTestFound() throws Exception {
-		final Optional<UserProfile> expected = Optional.of(UserProfile.builder().id(1L).userId("DemoUser").password("DemoPwd").build());
+    @Test
+    public void getUserTestFound() throws Exception {
+        final Optional<UserProfile> expected = Optional.of(UserProfile.builder().id(1L).userId("DemoUser").password("DemoPwd").build());
 
-		given(userProfileService.getUser("DemoUser")).willReturn(expected);
-		final MvcResult result = mockMvc.perform(get("/user/DemoUser")).andExpect(status().isOk()).andReturn();
-		final UserResult actual = objectMapper.readValue(result.getResponse().getContentAsString(), UserResult.class);
-		assertThat(actual.getUser()).isEqualTo(expected);
-	}
+        given(userProfileService.getUser("DemoUser")).willReturn(expected);
+        final MvcResult result = mockMvc.perform(get("/user/DemoUser")).andExpect(status().isOk()).andReturn();
+        final UserResult actual = objectMapper.readValue(result.getResponse().getContentAsString(), UserResult.class);
+        assertThat(actual.getUser()).isEqualTo(expected);
+    }
 
-	@Test
-	public void saveUser() throws Exception {
-		final UserProfile expected = UserProfile.builder().id(1L).userId("DemoUser").password("DemoPwd").build();
+    @Test
+    public void saveUser() throws Exception {
+        final UserProfile expected = UserProfile.builder().id(1L).userId("DemoUser").password("DemoPwd").build();
 
-		given(userProfileService.saveUser(expected)).willReturn(expected);
+        given(userProfileService.saveUser(expected)).willReturn(expected);
 
-		final MvcResult result = mockMvc.perform(post("/saveUser").content(objectMapper.writeValueAsString(expected)).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andReturn();
-		final UserResult actual = objectMapper.readValue(result.getResponse().getContentAsString(), UserResult.class);
-		assertThat(actual.getUser().get()).isEqualTo(expected);
-	}
+        final MvcResult result = mockMvc.perform(post("/saveUser").content(objectMapper.writeValueAsString(expected)).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andReturn();
+        final UserResult actual = objectMapper.readValue(result.getResponse().getContentAsString(), UserResult.class);
+        assertThat(actual.getUser().get()).isEqualTo(expected);
+    }
 
-	@Test
-	public void saveUserNoPwd() throws Exception {
-		final UserProfile user = UserProfile.builder().id(1L).userId("DemoUser").build();
+    @Test
+    public void saveUserNoPwd() throws Exception {
+        final UserProfile user = UserProfile.builder().id(1L).userId("DemoUser").build();
 
-		final MvcResult result = mockMvc.perform(post("/saveUser").content(objectMapper.writeValueAsString(user)).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isBadRequest()).andReturn();
-		assertThat(result.getResolvedException()).isInstanceOf(MethodArgumentNotValidException.class);
-	}
+        final MvcResult result = mockMvc.perform(post("/saveUser").content(objectMapper.writeValueAsString(user)).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest()).andReturn();
+        assertThat(result.getResolvedException()).isInstanceOf(MethodArgumentNotValidException.class);
+    }
 
-	@Test
-	public void saveUserNoUserId() throws Exception {
-		final UserProfile user = UserProfile.builder().id(1L).password("DemoPwd").build();
+    @Test
+    public void saveUserNoUserId() throws Exception {
+        final UserProfile user = UserProfile.builder().id(1L).password("DemoPwd").build();
 
-		final MvcResult result = mockMvc.perform(post("/saveUser").content(objectMapper.writeValueAsString(user)).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isBadRequest()).andReturn();
-		assertThat(result.getResolvedException()).isInstanceOf(MethodArgumentNotValidException.class);
-	}
+        final MvcResult result = mockMvc.perform(post("/saveUser").content(objectMapper.writeValueAsString(user)).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest()).andReturn();
+        assertThat(result.getResolvedException()).isInstanceOf(MethodArgumentNotValidException.class);
+    }
 
 }

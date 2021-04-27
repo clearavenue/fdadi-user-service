@@ -13,89 +13,89 @@ import lombok.NoArgsConstructor;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "product_ndc", "nui", "is_original_packager", "package_ndc", "generic_name", "spl_set_id", "pharm_class_cs", "upc", "brand_name", "manufacturer_name",
-		"pharm_class_pe", "rxcui", "unii", "spl_id", "substance_name", "product_type", "route", "pharm_class_moa", "application_number", "pharm_class_epc" })
+        "pharm_class_pe", "rxcui", "unii", "spl_id", "substance_name", "product_type", "route", "pharm_class_moa", "application_number", "pharm_class_epc" })
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class LabelOpenfda {
-	@JsonProperty("product_ndc")
-	@Builder.Default
-	public List<String> productNdc = null;
+    @JsonProperty("product_ndc")
+    @Builder.Default
+    public List<String> productNdc = null;
 
-	@JsonProperty("nui")
-	@Builder.Default
-	public List<String> nui = null;
+    @JsonProperty("nui")
+    @Builder.Default
+    public List<String> nui = null;
 
-	@JsonProperty("is_original_packager")
-	@Builder.Default
-	public List<Boolean> isOriginalPackager = null;
+    @JsonProperty("is_original_packager")
+    @Builder.Default
+    public List<Boolean> isOriginalPackager = null;
 
-	@JsonProperty("package_ndc")
-	@Builder.Default
-	public List<String> packageNdc = null;
+    @JsonProperty("package_ndc")
+    @Builder.Default
+    public List<String> packageNdc = null;
 
-	@JsonProperty("generic_name")
-	@Builder.Default
-	public List<String> genericName = null;
+    @JsonProperty("generic_name")
+    @Builder.Default
+    public List<String> genericName = null;
 
-	@JsonProperty("spl_set_id")
-	@Builder.Default
-	public List<String> splSetId = null;
+    @JsonProperty("spl_set_id")
+    @Builder.Default
+    public List<String> splSetId = null;
 
-	@JsonProperty("pharm_class_cs")
-	@Builder.Default
-	public List<String> pharmClassCs = null;
+    @JsonProperty("pharm_class_cs")
+    @Builder.Default
+    public List<String> pharmClassCs = null;
 
-	@JsonProperty("upc")
-	@Builder.Default
-	public List<String> upc = null;
+    @JsonProperty("upc")
+    @Builder.Default
+    public List<String> upc = null;
 
-	@JsonProperty("brand_name")
-	@Builder.Default
-	public List<String> brandName = null;
+    @JsonProperty("brand_name")
+    @Builder.Default
+    public List<String> brandName = null;
 
-	@JsonProperty("manufacturer_name")
-	@Builder.Default
-	public List<String> manufacturerName = null;
+    @JsonProperty("manufacturer_name")
+    @Builder.Default
+    public List<String> manufacturerName = null;
 
-	@JsonProperty("pharm_class_pe")
-	@Builder.Default
-	public List<String> pharmClassPe = null;
+    @JsonProperty("pharm_class_pe")
+    @Builder.Default
+    public List<String> pharmClassPe = null;
 
-	@JsonProperty("rxcui")
-	@Builder.Default
-	public List<String> rxcui = null;
+    @JsonProperty("rxcui")
+    @Builder.Default
+    public List<String> rxcui = null;
 
-	@JsonProperty("unii")
-	@Builder.Default
-	public List<String> unii = null;
+    @JsonProperty("unii")
+    @Builder.Default
+    public List<String> unii = null;
 
-	@JsonProperty("spl_id")
-	@Builder.Default
-	public List<String> splId = null;
+    @JsonProperty("spl_id")
+    @Builder.Default
+    public List<String> splId = null;
 
-	@JsonProperty("substance_name")
-	@Builder.Default
-	public List<String> substanceName = null;
+    @JsonProperty("substance_name")
+    @Builder.Default
+    public List<String> substanceName = null;
 
-	@JsonProperty("product_type")
-	@Builder.Default
-	public List<String> productType = null;
+    @JsonProperty("product_type")
+    @Builder.Default
+    public List<String> productType = null;
 
-	@JsonProperty("route")
-	@Builder.Default
-	public List<String> route = null;
+    @JsonProperty("route")
+    @Builder.Default
+    public List<String> route = null;
 
-	@JsonProperty("pharm_class_moa")
-	@Builder.Default
-	public List<String> pharmClassMoa = null;
+    @JsonProperty("pharm_class_moa")
+    @Builder.Default
+    public List<String> pharmClassMoa = null;
 
-	@JsonProperty("application_number")
-	@Builder.Default
-	public List<String> applicationNumber = null;
+    @JsonProperty("application_number")
+    @Builder.Default
+    public List<String> applicationNumber = null;
 
-	@JsonProperty("pharm_class_epc")
-	@Builder.Default
-	public List<String> pharmClassEpc = null;
+    @JsonProperty("pharm_class_epc")
+    @Builder.Default
+    public List<String> pharmClassEpc = null;
 }

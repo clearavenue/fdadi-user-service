@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MedicationResult {
 
-	private Optional<Medication> medication;
+    private Optional<Medication> medication;
 }

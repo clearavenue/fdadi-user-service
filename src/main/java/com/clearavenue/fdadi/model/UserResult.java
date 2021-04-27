@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserResult {
 
-	private Optional<UserProfile> user;
+    private Optional<UserProfile> user;
 }

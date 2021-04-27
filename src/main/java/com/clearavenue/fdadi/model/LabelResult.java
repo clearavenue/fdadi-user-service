@@ -19,10 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LabelResult {
 
-	@JsonProperty("meta")
-	public Meta meta;
+    @JsonProperty("meta")
+    public Meta meta;
 
-	@Builder.Default
-	@JsonProperty("results")
-	public List<LabelResults> results = null;
+    @Builder.Default
+    @JsonProperty("results")
+    public List<LabelResults> results = null;
 }

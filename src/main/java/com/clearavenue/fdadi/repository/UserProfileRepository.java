@@ -10,5 +10,5 @@ import com.clearavenue.fdadi.model.UserProfile;
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
 
-	Optional<UserProfile> findByUserId(String userId);
+    Optional<UserProfile> findByUserId(String userId);
 }

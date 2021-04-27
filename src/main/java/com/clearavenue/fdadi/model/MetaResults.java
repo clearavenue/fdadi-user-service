@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MetaResults {
-	@JsonProperty("skip")
-	public Integer skip;
-	@JsonProperty("limit")
-	public Integer limit;
-	@JsonProperty("total")
-	public Integer total;
+    @JsonProperty("skip")
+    public Integer skip;
+    @JsonProperty("limit")
+    public Integer limit;
+    @JsonProperty("total")
+    public Integer total;
 }

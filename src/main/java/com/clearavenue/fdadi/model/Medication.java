@@ -1,6 +1,3 @@
-/*
- *
- */
 package com.clearavenue.fdadi.model;
 
 import java.util.Locale;
@@ -26,25 +23,25 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Medication implements Comparable<Medication> {
 
-	@Id
-	@EqualsAndHashCode.Exclude
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @EqualsAndHashCode.Exclude
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String medicationName;
+    private String medicationName;
 
-	public static class MedicationBuilder {
-		String medicationName;
+    public static class MedicationBuilder {
+        String medicationName;
 
-		public MedicationBuilder medicationName(final String text) {
-			this.medicationName = text.toUpperCase(Locale.getDefault());
-			return this;
-		}
-	}
+        public MedicationBuilder medicationName(final String text) {
+            this.medicationName = text.toUpperCase(Locale.getDefault());
+            return this;
+        }
+    }
 
-	@Override
-	public int compareTo(final Medication o) {
-		return medicationName.compareTo(o.getMedicationName());
-	}
+    @Override
+    public int compareTo(final Medication o) {
+        return medicationName.compareTo(o.getMedicationName());
+    }
 
 }
