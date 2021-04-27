@@ -99,6 +99,7 @@ spec:
   ports:
     - name: http-user
       port: SERVICE_PORT
+      protocol: TCP
       targetPort: SERVICE_PORT
   selector:
     app: SERVICE_NAME
