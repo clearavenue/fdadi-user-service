@@ -124,19 +124,6 @@ spec:
       attempts: 5000
       perTryTimeout: 2s
       retryOn: connect-failure,internal,500,503,5xx,reset
-    websocketUpgrade: true
-  https:
-  - timeout: 60s
-    route:
-    - destination:
-        host: SERVICE_NAME.APP_NAME
-        port:
-          number: SERVICE_PORT
-    retries:
-      attempts: 5000
-      perTryTimeout: 2s
-      retryOn: connect-failure,internal,500,503,5xx,reset
-    websocketUpgrade: true
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
