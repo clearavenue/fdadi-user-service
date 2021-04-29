@@ -31,6 +31,6 @@ spring:
   profiles: local
 
   datasource:
-    url: jdbc:h2:mem:fdadi
+    url: jdbc:h2:file:/mnt/c/temp/fdadi;AUTO_SERVER=TRUE
     username: fdadi
     password: cL3ar#12
