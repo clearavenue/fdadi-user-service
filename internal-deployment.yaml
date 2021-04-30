@@ -130,7 +130,6 @@ spec:
       attempts: 5
       perTryTimeout: 2s
       retryOn: connect-failure,internal,500,503,5xx,reset
-    websocketUpgrade: true 
   - timeout: 60s
     route:
     - destination:
