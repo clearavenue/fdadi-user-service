@@ -99,6 +99,7 @@ spec:
   ports:
     - name: http-user
       port: SERVICE_PORT
+      protocol: TCP
       targetPort: SERVICE_PORT
   selector:
     app: SERVICE_NAME
@@ -114,6 +115,21 @@ spec:
   gateways:
   - "ingressgateway.istio-system"
   http:
+  - match:
+    - uri:
+        prefix: "/BRANCH_NAME/"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: SERVICE_NAME.APP_NAME.svc.cluster.local
+        subset: BRANCH_NAME
+        port:
+          number: SERVICE_PORT
+    retries:
+      attempts: 5
+      perTryTimeout: 2s
+      retryOn: connect-failure,internal,500,503,5xx,reset
   - timeout: 60s
     route:
     - destination:
