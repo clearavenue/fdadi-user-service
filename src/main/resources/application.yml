@@ -28,9 +28,11 @@ management:
 ---
 
 spring:
-  profiles: local
-
+  config:
+    activate:
+      on-profile: local
+  
   datasource:
-    url: jdbc:h2:file:/mnt/c/temp/fdadi;AUTO_SERVER=TRUE
+    url: jdbc:h2:file:fdadi;AUTO_SERVER=TRUE
     username: fdadi
     password: cL3ar#12
