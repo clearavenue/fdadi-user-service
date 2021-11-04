@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:fdadi
+    username: fdadi
+    password: cL3ar#12
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: update
