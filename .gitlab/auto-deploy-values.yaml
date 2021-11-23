@@ -1,0 +1,4 @@
+livenessProbe:
+  path: "/actuator/health"
+readinessProbe:
+  path: "/actuator/health"
