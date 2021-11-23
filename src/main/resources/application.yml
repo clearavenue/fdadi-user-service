@@ -2,16 +2,20 @@ spring:
   application:
     name: fdadi-user-service
   datasource:
-    #url: jdbc:mysql://fdadi-db:3306/fdadi?useSSL=false&allowPublicKeyRetrieval=true
-    url: jdbc:h2:mem:fdadi
-    username: fdadi
+    url: jdbc:mysql://fdadi.cdumsso0znfp.us-east-1.rds.amazonaws.com:3306/fdadi
+    #url: jdbc:h2:mem:fdadi
+    username: admin
     password: cL3ar#12
-    driver-class-name: org.h2.Driver
+    #driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      jdbc-url: jdbc:h2:mem:fdadi
+      #jdbc-url: jdbc:h2:mem:fdadi
+      jdbc-url: jdbc:mysql://fdadi.cdumsso0znfp.us-east-1.rds.amazonaws.com:3306/fdadi
   jpa:
-    database: H2
-    database-platform: org.hibernate.dialect.H2Dialect
+    #database: H2
+    #database-platform: org.hibernate.dialect.H2Dialect
+    database: MYSQL
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
       
