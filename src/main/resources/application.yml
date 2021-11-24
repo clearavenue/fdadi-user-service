@@ -3,17 +3,12 @@ spring:
     name: fdadi-user-service
   datasource:
     url: jdbc:mysql://mysql.default.svc.cluster.local:3306/fdadi
-    #url: jdbc:h2:mem:fdadi
     username: fdadi
     password: cL3ar#12
-    #driver-class-name: org.h2.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      #jdbc-url: jdbc:h2:mem:fdadi
-      jdbc-url: jdbc:mysql://mysql.default.svc.cluster.local:3306/fdadi
+#    hikari:
+#      jdbc-url: jdbc:mysql://mysql.default.svc.cluster.local:3306/fdadi
   jpa:
-    #database: H2
-    #database-platform: org.hibernate.dialect.H2Dialect
     database: MYSQL
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
