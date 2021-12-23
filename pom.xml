@@ -21,6 +21,7 @@
                 <!-- vulnerability version fixes -->
                 <h2.version>2.0.202</h2.version>
 		<netty.version>4.1.72.Final</netty.version>
+                <netty-tcnative.version>2.0.46.Final</netty-tcnative.version>
 	</properties>
 
 	<dependencies>
