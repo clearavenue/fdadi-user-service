@@ -1,6 +1,6 @@
 @Library('clearavenue/clearavenue-jenkins-sharedlib')_
 
-springbootBuildTestPipeline {
+mavenOnlyPipeline {
   app_name = 'fdadi-user-service'
   liveness_url = '/actuator/health'
   readiness_url = '/actuator/health'
