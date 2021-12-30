@@ -10,7 +10,7 @@
 
 	<groupId>com.clearavenue</groupId>
 	<artifactId>fdadi-user-service</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 	<name>fdadi-user-service</name>
 	<description>fdadi user service</description>
 
