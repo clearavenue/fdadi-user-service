@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FdadiUserServiceApplication {
 
+    // TODO: change to use '@Autowired' instead of '@RequiredArgsConstructor+private final'
     private final BuildProperties buildProperties;
 
     @Bean
